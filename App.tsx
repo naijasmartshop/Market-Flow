@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AuthStep, User, UserRole, Product } from './types';
 import { Input } from './components/Input';
 import { Button } from './components/Button';
@@ -274,12 +275,15 @@ export default function App() {
       } else {
         // Refresh local list
         fetchProducts();
-        // Reset form
+        // Reset form completely
         setNewProductTitle('');
         setNewProductPrice('');
         setNewProductVideo('');
         setNewProductDesc('');
         setNewProductImages([]);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
       }
     } catch (err) {
       console.error(err);

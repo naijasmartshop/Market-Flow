@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { Product, UserRole } from '../types';
 import { Button } from './Button';
 import { MessageCircle, Trash2, ShoppingBag, ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
@@ -14,9 +15,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, userRole, onD
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showVideo, setShowVideo] = useState(false);
 
-  // WhatsApp link placeholder
-  const whatsappNumber = "1234567890"; 
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi, I am interested in your product: ${product.title}`;
+  // Updated WhatsApp URL
+  const phoneNumber = "+2347061398349";
+  const message = `Hi, I am interested in your product: ${product.title}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   // Helper to safely get current image
   const currentImage = product.images && product.images.length > 0 
@@ -155,7 +157,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, userRole, onD
           )}
 
           {userRole === UserRole.SELLER && onDelete && (
-            <Button variant="danger" onClick={() => onDelete(product.id)}>
+            <Button 
+              variant="danger" 
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(product.id);
+              }}
+            >
               <Trash2 size={18} />
               Remove Listing
             </Button>
