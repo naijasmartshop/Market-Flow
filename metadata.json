@@ -1,0 +1,7 @@
+{
+  "name": "MarketFlow",
+  "description": "A streamlined shopping experience connecting buyers and sellers with a unique role-based onboarding flow.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
