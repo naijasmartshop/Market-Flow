@@ -16,6 +16,7 @@ export interface User {
   email: string;
   username: string;
   role: UserRole;
+  avatar?: string;
 }
 
 export interface Product {
